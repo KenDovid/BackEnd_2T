@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1762298662341,
+    "cliente": "Ramon",
+    "items": [
+      {
+        "nombre": "Papas",
+        "cantidad": 4,
+        "precio": 50
+      }
+    ],
+    "subtotal": 200,
+    "iva": 32,
+    "total": 232
+  },
+  {
+    "id": 1762298681085,
+    "cliente": "Carlos",
+    "items": [
+      {
+        "nombre": "Soda",
+        "cantidad": 3,
+        "precio": 20
+      }
+    ],
+    "subtotal": 60,
+    "iva": 9.6,
+    "total": 69.6
+  }
+]
