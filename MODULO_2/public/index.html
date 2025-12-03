@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>CRUD Minimalista</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #f3f3f3;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        input {
+            padding: 5px;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .box {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+
+        pre {
+            background: #222;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Frontend Minimalista — CRUD EXPRESS + JSON</h1>
+
+    <!-- ====================== -->
+    <!--  MOSTRAR TODOS         -->
+    <!-- ====================== -->
+    <div class="box">
+        <h2>Ver todos</h2>
+        <button onclick="getItems()">Cargar Items</button>
+    </div>
+
+    <!-- ====================== -->
+    <!--  CREAR                 -->
+    <!-- ====================== -->
+    <div class="box">
+        <h2>Crear</h2>
+        <input id="createName" placeholder="Nombre..." />
+        <button onclick="createItem()">Crear</button>
+    </div>
+
+    <!-- ====================== -->
+    <!--  ACTUALIZAR            -->
+    <!-- ====================== -->
+    <div class="box">
+        <h2>Actualizar</h2>
+        <input id="updateId" type="number" placeholder="ID..." />
+        <input id="updateName" placeholder="Nuevo nombre..." />
+        <button onclick="updateItem()">Actualizar</button>
+    </div>
+
+    <!-- ====================== -->
+    <!--  ELIMINAR              -->
+    <!-- ====================== -->
+    <div class="box">
+        <h2>Eliminar</h2>
+        <input id="deleteId" type="number" placeholder="ID..." />
+        <button onclick="deleteItem()">Eliminar</button>
+    </div>
+
+    <!-- ====================== -->
+    <!--  RESULTADOS            -->
+    <!-- ====================== -->
+    <h2>Resultado:</h2>
+    <pre id="output">Aquí verás resultados del servidor...</pre>
+
+
+    <script>
+        const API = "http://localhost:3000";
+
+        // Mostrar resultados en pantalla
+        function log(text) {
+            document.getElementById("output").textContent = text;
+        }
+
+        // =========================
+        // READ
+        // =========================
+        async function getItems() {
+            const res = await fetch(`${API}/items`);
+            const data = await res.json();
+            log(JSON.stringify(data, null, 2));
+        }
+
+        // =========================
+        // CREATE
+        // =========================
+        async function createItem() {
+            const name = document.getElementById("createName").value.trim();
+
+            if (!name) return log("Escribe un nombre primero.");
+
+            const res = await fetch(`${API}/create?name=${encodeURIComponent(name)}`);
+            const text = await res.text();
+            log(text);
+        }
+
+        // =========================
+        // UPDATE
+        // =========================
+        async function updateItem() {
+            const id = document.getElementById("updateId").value;
+            const name = document.getElementById("updateName").value.trim();
+
+            if (!id || !name) return log("Escribe id y nuevo nombre.");
+
+            const res = await fetch(`${API}/update?id=${id}&name=${encodeURIComponent(name)}`);
+            const text = await res.text();
+            log(text);
+        }
+
+        // =========================
+        // DELETE
+        // =========================
+        async function deleteItem() {
+            const id = document.getElementById("deleteId").value;
+
+            if (!id) return log("Escribe un ID.");
+
+            const res = await fetch(`${API}/delete?id=${id}`);
+            const text = await res.text();
+            log(text);
+        }
+    </script>
+
+</body>
+
+</html>
