@@ -5,7 +5,10 @@ const { Pool } = pkg;
 export const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    password: '1234',
-    database: 'crud_db',
+    password: 'Panda03010518',
+    database: 'crud_express_pg',
     port: 5432
 });
+
+
+export default pool;

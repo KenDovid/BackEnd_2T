@@ -1,21 +1,28 @@
 {
   "name": "modulo_3",
   "version": "1.0.0",
+  "type": "module",
   "main": "db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "generate-pdf":"node export_pdf.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "pg": "^8.16.3"
+    "node-telegram-bot-api": "^0.66.0",
+    "nodemailer": "^7.0.11",
+    "pdfkit": "^0.17.2",
+    "pg": "^8.16.3",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
-  }
+  },
+  "description": ""
 }
